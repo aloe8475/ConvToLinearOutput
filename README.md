@@ -39,4 +39,4 @@ So, using the example values, the number of pixels/features after 1st layer (q= 
 The output of conv2linear(<inputs>) will be 512, which you can then use for your linear layer.
        
 ## Example Implementation
-See [example.py](example) 
+See [example](example.py) 
