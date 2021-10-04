@@ -1,7 +1,15 @@
 # ConvToLinearOutput
-A simple function to flatten and convolutional layer outputs into a 1D input for linear layers 
+A simple function to flatten and convolutional layer outputs into a 1D input for linear layers in PyTorch
 
-**Inputs** - Example values taken from https://pythonprogramming.net/convnet-model-deep-learning-neural-network-pytorch/?completed=/convolutional-neural-networks-deep-learning-neural-network-pytorch/ 
+## Required Packages:
+- Python
+- PyTorch
+- Numpy
+
+## Inputs
+
+Example values taken from https://pythonprogramming.net/convnet-model-deep-learning-neural-network-pytorch/?completed=/convolutional-neural-networks-deep-learning-neural-network-pytorch/ 
+
 - Initial image size, W = 50, L = 50
 - Kernel Size, k = 5
 - Stride , s = 1
@@ -12,9 +20,11 @@ A simple function to flatten and convolutional layer outputs into a 1D input for
 
 To flatten the convolutional layer outputs into inputs for the linear layers, we use the following algorithm:
        
+## Algorithm
 
 <img src="https://render.githubusercontent.com/render/math?math=O = ({ \frac{(W - k + 2P)}{s} } + 1) *({ \frac{(L - k + 2P)}{s} } + 1)* q">
-so, number of pixels/features after 1st layer (q= 32): (((50 - 5 + 0)/1) +1) x (((50 - 5 + 0)/1) +1) x 32 = 46x46x32
+
+So, using the example values, the number of pixels/features after 1st layer (q= 32): (((50 - 5 + 0)/1) +1) x (((50 - 5 + 0)/1) +1) x 32 = 46x46x32
 
 ==> then we have pooling of {2,2}, so 24/2 = 23x23x32
 
@@ -26,3 +36,7 @@ so, number of pixels/features after 1st layer (q= 32): (((50 - 5 + 0)/1) +1) x (
 
 ==> then we have pooling of {2,2}, so 24/2 = 2x2x128 = 512
 
+The output of conv2linear(<inputs>) will be 512, which you can then use for your linear layer.
+       
+## Example Implementation
+See example.py 
