@@ -1,7 +1,7 @@
 # ConvToLinearOutput
 A simple function to flatten and convolutional layer outputs into a 1D input for linear layers 
 
-**Inputs**
+**Inputs** - Example values taken from https://pythonprogramming.net/convnet-model-deep-learning-neural-network-pytorch/?completed=/convolutional-neural-networks-deep-learning-neural-network-pytorch/ 
 - Initial image size, W = 50, L = 50
 - Kernel Size, k = 5
 - Stride , s = 1
