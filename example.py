@@ -22,7 +22,8 @@ class Net(nn.Module):#input a nn module
         #define linear layers
         self.fc1 = nn.Linear(flatConv, 512) #flattening
         self.fc2 = nn.Linear(512, 2)#2 outputs = 2 classes
-        
+    
+    #conv2linear.py defined in Net class
     def conv2linear(self,IMG_SIZE,kernel_size,padding,stride,num_layers=3,num_nodes=[]):
         for layer in range(num_layers):
             if layer == 0:
@@ -32,8 +33,9 @@ class Net(nn.Module):#input a nn module
                 layershape=np.hstack((int(((poolshape[0]-kernel_size+2*padding)/stride)+1),(int(((poolshape[1]-kernel_size+2*padding)/stride)+1))))
                 poolshape=np.hstack(((layershape/2),num_nodes[layer])).astype(int)
         return np.prod(poolshape)
-      
-   def forward(self, x): #define how data passes through Net model (feed-forward).
+    
+   #define how data passes through Net model (feed-forward)
+   def forward(self, x):
           x = self.convs(x)
           x = x.view(-1,self._to_linear) #flatten the data
           x = F.relu(self.fc1(x)) #relu activation for linear layer
