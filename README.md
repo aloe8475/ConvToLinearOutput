@@ -10,12 +10,12 @@ A simple function to flatten and convolutional layer outputs into a 1D input for
 
 Example values taken from https://pythonprogramming.net/convnet-model-deep-learning-neural-network-pytorch/?completed=/convolutional-neural-networks-deep-learning-neural-network-pytorch/ 
 
-- Initial image size, W = 50, L = 50
-- Kernel Size, k = 5
-- Stride , s = 1
-- Padding, P = 0
-- Num Layers = num_layers
-- Num Nodes per Layer, q = conv layer output size = num_nodes (list of all the node layer sizes) e.g [32, 64, 128]
+- Initial image size, (W = 50, L = 50) ==> IMG_SIZE (list of width x length) e.g. [50,50]
+- Kernel Size, k = 5  ==> kernel_size
+- Stride , s = 1 ==> stride
+- Padding, P = 0 ==> padding
+- Num Layers = 3 ==> num_layers
+- Num Nodes per Layer, q = (32,64,128) ==> num_nodes (list of number of nodes in each convolutional layer) e.g [32, 64, 128]
 
 
 To flatten the convolutional layer outputs into inputs for the linear layers, we use the following algorithm:
