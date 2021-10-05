@@ -1,5 +1,5 @@
 # ConvToLinearOutput
-A simple function to flatten and convolutional layer outputs into a 1D input for linear layers in PyTorch
+A simple function to calculate 1D input for linear layers from convolutional layer outputs in PyTorch
 
 ## Required Packages:
 - Python
