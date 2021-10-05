@@ -36,11 +36,13 @@ class Net(nn.Module):#input a nn module
     
    #define how data passes through Net model (feed-forward)
    def forward(self, x):
-          x = self.convs(x)
-          x = x.view(-1,self._to_linear) #flatten the data
-          x = F.relu(self.fc1(x)) #relu activation for linear layer
-          x = self.fc2(x) #output, no activation
-          return F.softmax(x, dim=1)
+        x = F.max_pool2d(F.relu(self.conv1(x)), (2, 2))
+        x = F.max_pool2d(F.relu(self.conv2(x)), (2, 2))
+        x = F.max_pool2d(F.relu(self.conv3(x)), (2, 2))
+        x = torch.flatten(x,1,-1) #flatten data 
+        x = F.relu(self.fc1(x)) #relu activation for linear layer
+        x = self.fc2(x) #output, no activation
+        return F.softmax(x, dim=1)
 
 net = Net()
 print(net)
