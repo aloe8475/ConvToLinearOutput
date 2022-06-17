@@ -26,15 +26,15 @@ To flatten the convolutional layer outputs into inputs for the linear layers, we
 
 So, using the example values, the number of pixels/features after 1st layer (q= 32): (((50 - 5 + 0)/1) +1) x (((50 - 5 + 0)/1) +1) x 32 = 46x46x32
 
-==> then we have pooling of {2,2}, so 24/2 = 23x23x32
+==> then we have pooling of {2,2}, so (((46 - 2 + 0)/2) +1) x (((46 - 2 + 0)/2) +1) x 32 = 23x23x32
 
 ==> then another layer sized 64: { (23 - 5 + 0)/1 } +1 = 19x19x64
 
-==> then we have pooling of {2,2}, so 24/2 = 9x9x64
+==> then we have pooling of {2,2}: { (19 - 2 + 0)/2 } +1==> 9x9x64
 
 ==> then another layer sized 128: { (9 - 5 + 0)/1 } +1 = 5x5x128
 
-==> then we have pooling of {2,2}, so 24/2 = 2x2x128 = 512
+==> then we have pooling of {2,2}, so { (5 - 2 + 0)/2 } +1 = 2x2x128 = 512 (flattened)
 
 The output of conv2linear(<inputs>) will be 512, which you can then use for your linear layer.
        
