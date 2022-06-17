@@ -22,7 +22,7 @@ To flatten the convolutional layer outputs into inputs for the linear layers, we
        
 ## Algorithm
 
-<img src="https://render.githubusercontent.com/render/math?math=O = ({ \frac{(W - k \%2B 2P)}{s} } \%2B 1) *({ \frac{(L - k \%2B 2P)}{s} } \%2B 1)* q">
+<img src="https://render.githubusercontent.com/render/math?math=O = ({ \frac{(W - k \%2b 2P)}{s} } \%2b 1) *({ \frac{(L - k \%2b 2P)}{s} } \%2b 1)* q">
 
 So, using the example values, the number of pixels/features after 1st layer (q= 32): (((50 - 5 + 0)/1) +1) x (((50 - 5 + 0)/1) +1) x 32 = 46x46x32
 
