@@ -17,7 +17,7 @@ class Net(nn.Module):#input a nn module
         self.conv3 = nn.Conv2d(64, 128, kernel_size) #64 inputs, 128 outputs, kernel size = 5
         
         # we now need to move from convolution layers to linear layers (FLATTEN)
-        flatConv=self.conv2linear(IMG_SIZE,kernel_size,padding,stride,pool_size=2,pool_padding=0,pool_stride=2,num_layers,num_nodes=num_nodes) #CALL conv2linear to go from convolutional to linear
+        flatConv=self.conv2linear(IMG_SIZE,kernel_size,padding,stride,pool_size=2,pool_padding=0,pool_stride=2,num_layers=num_layers,num_nodes=num_nodes) #CALL conv2linear to go from convolutional to linear
         
         #define linear layers
         self.fc1 = nn.Linear(flatConv, 512) #flattening
