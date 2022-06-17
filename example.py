@@ -17,26 +17,26 @@ class Net(nn.Module):#input a nn module
         self.conv3 = nn.Conv2d(64, 128, kernel_size) #64 inputs, 128 outputs, kernel size = 5
         
         # we now need to move from convolution layers to linear layers (FLATTEN)
-        flatConv=self.conv2linear(IMG_SIZE,kernel_size,padding,stride,num_layers,num_nodes=num_nodes) #CALL conv2linear to go from convolutional to linear
+        flatConv=self.conv2linear(IMG_SIZE,kernel_size,padding,stride,pool_size=2,pool_padding=0,pool_stride=2,num_layers,num_nodes=num_nodes) #CALL conv2linear to go from convolutional to linear
         
         #define linear layers
         self.fc1 = nn.Linear(flatConv, 512) #flattening
         self.fc2 = nn.Linear(512, 2)#2 outputs = 2 classes
     
     #conv2linear.py defined in Net class
-    def conv2linear(self,IMG_SIZE,kernel_size,padding,stride,num_layers=3,num_nodes=[]):
+    def conv2linear(IMG_SIZE,kernel_size,padding,stride,pool_size,pool_padding,pool_stride,num_layers=3,num_nodes=[]):
         for layer in range(num_layers):
-            if layer == 0:
+            if layer == 0: #if this is the first layer, we want the image size
                 layershape=np.hstack((int(((IMG_SIZE[0]-kernel_size+2*padding)/stride)+1),(int(((IMG_SIZE[1]-kernel_size+2*padding)/stride)+1))))
-                poolshape=np.hstack(((layershape/2),num_nodes[layer])).astype(int)
-            else:
+                poolshape=np.hstack((int(((layershape[0]-pool_size+2*pool_padding)/pool_stride)+1),(int(((layershape[1]-pool_size+2*pool_padding)/pool_stride)+1)))).astype(int)
+            else: #if this is layer 2+, we want the previous output pool layer size 
                 layershape=np.hstack((int(((poolshape[0]-kernel_size+2*padding)/stride)+1),(int(((poolshape[1]-kernel_size+2*padding)/stride)+1))))
-                poolshape=np.hstack(((layershape/2),num_nodes[layer])).astype(int)
-        return np.prod(poolshape)
+                poolshape=np.hstack((int(((layershape[0]-pool_size+2*pool_padding)/pool_stride)+1),(int(((layershape[1]-pool_size+2*pool_padding)/pool_stride)+1)))).astype(int)
+        return np.prod(poolshape) 
     
    #define how data passes through Net model (feed-forward)
    def forward(self, x):
-        x = F.max_pool2d(F.relu(self.conv1(x)), (2, 2))
+        x = F.max_pool2d(F.relu(self.conv1(x)), (2, 2)) #pool kernel 2, stride 2, padding 0 (default)
         x = F.max_pool2d(F.relu(self.conv2(x)), (2, 2))
         x = F.max_pool2d(F.relu(self.conv3(x)), (2, 2))
         x = torch.flatten(x,1,-1) #flatten data 
